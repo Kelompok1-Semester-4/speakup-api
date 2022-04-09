@@ -14,15 +14,16 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+        $id = $request->input('id');
         $role_id = $request->input('role_id');
-
-        if ($role_id) {
-            // get detail user and user data by role_id
-            $users = User::where('role_id', $role_id)->with('detailUser', 'role')->get();
-            return response()->json(ResponseFormatter::success($users));
+        $user = DetailUser::with('user')->get();
+        if ($id) {
+            return $user->where('user_id', $id)->first();
         }
-
-        return ResponseFormatter::success(User::with('detailUser', 'role')->get());
+        if ($role_id) {
+            return $user->where('role_id', $role_id)->with('user')->get();
+        }
+        return $user;
     }
 
     public function register(Request $request)
