@@ -17,11 +17,12 @@ class UserController extends Controller
         $role_id = $request->input('role_id');
 
         if ($role_id) {
-            $user = User::where('role_id', $role_id)->get();
-            return $user->with('detailUser')->get();
+            // get detail user and user data by role_id
+            $users = User::where('role_id', $role_id)->with('detailUser')->get();
+            return $users;
         }
 
-        return User::with(['detailUser', 'role'])->get();
+        return User::with('detailUser', 'role')->get();
     }
 
     public function register(Request $request)
