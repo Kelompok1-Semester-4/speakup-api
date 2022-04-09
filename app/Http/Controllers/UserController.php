@@ -17,7 +17,8 @@ class UserController extends Controller
         $role_id = $request->input('role_id');
 
         if ($role_id) {
-            return User::with(['detailUser', 'role'])->where('role_id', $role_id)->get();
+            $user = User::where('role_id', $role_id)->get();
+            return $user->with('detailUser')->get();
         }
 
         return User::with(['detailUser', 'role'])->get();
