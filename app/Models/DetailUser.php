@@ -18,8 +18,10 @@ class DetailUser extends Model
         'address',
     ];
 
-    public function user() {
-        return $this->hasOne(User::class);
+    // relation to user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function diary()

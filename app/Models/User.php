@@ -59,7 +59,7 @@ class User extends Authenticatable
     ];
 
     public function detailUser() {
-        return $this->belongsTo(User::class, 'id', 'user_id'); 
+        return $this->hasOne(User::class); 
     }
 
     public function role() {
