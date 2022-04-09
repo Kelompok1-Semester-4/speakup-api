@@ -22,7 +22,7 @@ class UserController extends Controller
             return response()->json(ResponseFormatter::success($users));
         }
 
-        return response()->json(ResponseFormatter::error('Role id is required'));
+        return ResponseFormatter::success(User::with('detailUser', 'role')->get());
     }
 
     public function register(Request $request)
