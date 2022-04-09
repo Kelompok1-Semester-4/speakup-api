@@ -19,9 +19,8 @@ class DetailUser extends Model
     ];
 
     // relation to user
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+    public function user() {
+        return $this->belongsTo(User::class, 'id', 'user_id');
     }
 
     public function diary()
