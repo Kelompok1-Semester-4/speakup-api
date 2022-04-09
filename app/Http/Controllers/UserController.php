@@ -18,11 +18,11 @@ class UserController extends Controller
 
         if ($role_id) {
             // get detail user and user data by role_id
-            $users = User::where('role_id', $role_id)->with('detailUser')->get();
-            return $users;
+            $users = User::where('role_id', $role_id)->with('detailUser', 'role')->get();
+            return response()->json(ResponseFormatter::success($users));
         }
 
-        return User::with('detailUser', 'role')->get();
+        return response()->json(ResponseFormatter::error('Role id is required'));
     }
 
     public function register(Request $request)
