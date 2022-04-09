@@ -20,8 +20,7 @@ class UserController extends Controller
             return User::with(['detailUser', 'role'])->where('role_id', $role_id)->get();
         }
 
-        $course = User::with('detailUser', 'role')->get();
-        return response()->json($course);
+        return User::with(['detailUser', 'role'])->get();
     }
 
     public function register(Request $request)
