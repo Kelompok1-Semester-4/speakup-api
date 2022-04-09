@@ -17,10 +17,10 @@ class UserController extends Controller
         $role_id = $request->input('role_id');
 
         if ($role_id) {
-            return DetailUser::with('user')->where('role_id', $role_id)->get();
+            return User::with(['detailUser', 'role'])->where('role_id', $role_id)->get();
         }
 
-        $course = DetailUser::with('user')->get();
+        $course = User::with('detailUser', 'role')->get();
         return response()->json($course);
     }
 
